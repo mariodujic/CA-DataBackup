@@ -5,9 +5,13 @@ import (
 )
 
 func main() {
-	status, err := service.GetMiddlewareResponse("hr")
-	if err != nil {}
-	for _, prayer := range status.Data {
+
+	res, err := service.GetPrayers("hr")
+	if err != nil {
+		println("Unable to process request")
+	}
+
+	for _, prayer := range res.Data {
 		print(prayer.Title)
 	}
 }
