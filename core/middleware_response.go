@@ -14,9 +14,5 @@ func GetMiddlewareResponse(endpoint string, locale string) (*http.Response, erro
 	req.Header.Set(constants.HeaderSecretKey, constants.HeaderSecretValue)
 
 	client := &http.Client{}
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	return res, nil
+	return client.Do(req)
 }
