@@ -14,10 +14,10 @@ func GetMiddlewareResponseData(endPoint string, locale string) interface{} {
 	var response data.MiddlewareResponse
 	err = json.NewDecoder(res.Body).Decode(&response)
 	if err != nil {
-		println("Unable to decode response")
+		println("Unable to decode response for" + endPoint + "  " + locale)
 	}
 	if response.Status != 200 {
 		println(fmt.Sprintf("Invalid request with code %s", res.Status))
 	}
- 	return response.Data
+	return response.Data
 }

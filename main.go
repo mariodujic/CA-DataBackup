@@ -9,12 +9,12 @@ import (
 
 func main() {
 	localeSlice := [6]string{"hr", "en", "sk", "hr-staging", "en-staging", "sk-staging"}
-	featureSlice := [7]string{"quizzes", "thoughts", "information-block", "saints", "prayers", "ad-config", "user-report"}
+	featureSlice := [6]string{"quizzes", "thoughts", "information-block", "saints", "prayers", "user-report"}
 
 	getMiddlewareDataAndStoreToJson(localeSlice, featureSlice)
 }
 
-func getMiddlewareDataAndStoreToJson(localeSlice [6]string, featureSlice [7]string) {
+func getMiddlewareDataAndStoreToJson(localeSlice [6]string, featureSlice [6]string) {
 	wg := sync.WaitGroup{}
 	wg.Add(len(localeSlice) * len(featureSlice))
 

@@ -7,7 +7,6 @@ import (
 )
 
 func GetMiddlewareRequest(endpoint string, locale string) (*http.Response, error) {
-	println(fmt.Sprintf("%s/%s/%s", constants.BaseUrl, endpoint, locale))
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%s/%s", constants.BaseUrl, endpoint, locale), nil)
 	if err != nil {
 		return nil, err
