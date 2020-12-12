@@ -16,10 +16,10 @@ func main() {
 	localeArray[4] = "en-staging"
 	localeArray[5] = "sk-staging"
 
-	getPrayerDataAndStoreToJson(localeArray)
+	getMiddlewareDataAndStoreToJson(localeArray)
 }
 
-func getPrayerDataAndStoreToJson(localeArray [6]string) {
+func getMiddlewareDataAndStoreToJson(localeArray [6]string) {
 	wg := sync.WaitGroup{}
 	wg.Add(len(localeArray) * 2)
 

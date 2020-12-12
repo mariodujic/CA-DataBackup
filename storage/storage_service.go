@@ -22,6 +22,5 @@ func directoryExistsOrCreate() {
 
 func createFile(fileName string, data interface{}) {
 	jsonArray, _ := json.Marshal(data)
-	file, _ := json.MarshalIndent(string(jsonArray), "", " ")
-	_ = ioutil.WriteFile(fmt.Sprintf("%s/%s.json", databaseDirectoryPath, fileName), file, 0644)
+	_ = ioutil.WriteFile(fmt.Sprintf("%s/%s.json", databaseDirectoryPath, fileName), jsonArray, 0644)
 }
