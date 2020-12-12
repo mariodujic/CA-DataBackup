@@ -1,4 +1,4 @@
-package core
+package data
 
 import (
 	"CA-DataBackup/constants"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func GetMiddlewareResponse(endpoint string, locale string) (*http.Response, error) {
+func GetMiddlewareRequest(endpoint string, locale string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%s/%s", constants.BaseUrl, endpoint, locale), nil)
 	if err != nil {
 		return nil, err

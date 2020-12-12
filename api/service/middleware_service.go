@@ -2,17 +2,16 @@ package service
 
 import (
 	"CA-DataBackup/api/data"
-	"CA-DataBackup/core"
 	"encoding/json"
 	"fmt"
 )
 
-func GetThoughts(endPoint string, locale string) interface{} {
-	res, err := core.GetMiddlewareResponse(endPoint, locale)
+func GetMiddlewareResponseData(endPoint string, locale string) interface{} {
+	res, err := data.GetMiddlewareRequest(endPoint, locale)
 	if err != nil {
 		println("Unable to process request")
 	}
-	var response data.ThoughtsResponse
+	var response data.MiddlewareResponse
 	err = json.NewDecoder(res.Body).Decode(&response)
 	if err != nil {
 		println("Unable to decode response")

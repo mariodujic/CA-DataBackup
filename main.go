@@ -26,12 +26,12 @@ func getPrayerDataAndStoreToJson(localeArray [6]string) {
 	for _, locale := range localeArray {
 		locale := locale
 		go func() {
-			data := service.GetPrayers("prayers", locale)
+			data := service.GetMiddlewareResponseData("prayers", locale)
 			storage.WriteJsonArray(fmt.Sprintf("prayers-%s", locale), data)
 			defer wg.Done()
 		}()
 		go func() {
-			data := service.GetThoughts("thoughts", locale)
+			data := service.GetMiddlewareResponseData("thoughts", locale)
 			storage.WriteJsonArray(fmt.Sprintf("thoughts-%s", locale), data)
 			defer wg.Done()
 		}()
