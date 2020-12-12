@@ -2,11 +2,12 @@ package storage
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 )
 
-func WriteJsonArray(v interface{}) {
-	jsonArray, _ := json.Marshal(v)
+func WriteJsonArray(fileName string, i interface{}) {
+	jsonArray, _ := json.Marshal(i)
 	file, _ := json.MarshalIndent(string(jsonArray), "", " ")
-	_ = ioutil.WriteFile("test.json", file, 0644)
+	_ = ioutil.WriteFile(fmt.Sprintf("database/%s.json", fileName), file, 0644)
 }

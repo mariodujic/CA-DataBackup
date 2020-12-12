@@ -16,3 +16,5 @@
 
 # Closed information
 constants/secrets.go
+database
+.idea
