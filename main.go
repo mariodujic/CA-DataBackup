@@ -8,33 +8,24 @@ import (
 )
 
 func main() {
-	var localeArray [6]string
-	localeArray[0] = "hr"
-	localeArray[1] = "en"
-	localeArray[2] = "sk"
-	localeArray[3] = "hr-staging"
-	localeArray[4] = "en-staging"
-	localeArray[5] = "sk-staging"
+	localeSlice := [6]string{"hr", "en", "sk", "hr-staging", "en-staging", "sk-staging"}
+	featureSlice := [7]string{"quizzes", "thoughts", "information-block", "saints", "prayers", "ad-config", "user-report"}
 
-	getMiddlewareDataAndStoreToJson(localeArray)
+	getMiddlewareDataAndStoreToJson(localeSlice, featureSlice)
 }
 
-func getMiddlewareDataAndStoreToJson(localeArray [6]string) {
+func getMiddlewareDataAndStoreToJson(localeSlice [6]string, featureSlice [7]string) {
 	wg := sync.WaitGroup{}
-	wg.Add(len(localeArray) * 2)
+	wg.Add(len(localeSlice) * len(featureSlice))
 
-	for _, locale := range localeArray {
-		locale := locale
-		go func() {
-			data := service.GetMiddlewareResponseData("prayers", locale)
-			storage.WriteJsonArray(fmt.Sprintf("prayers-%s", locale), data)
-			defer wg.Done()
-		}()
-		go func() {
-			data := service.GetMiddlewareResponseData("thoughts", locale)
-			storage.WriteJsonArray(fmt.Sprintf("thoughts-%s", locale), data)
-			defer wg.Done()
-		}()
+	for _, locale := range localeSlice {
+		for _, feature := range featureSlice {
+			go func(feature string, locale string) {
+				data := service.GetMiddlewareResponseData(feature, locale)
+				storage.WriteJsonArray(fmt.Sprintf("%s-%s", feature, locale), data)
+				defer wg.Done()
+			}(feature, locale)
+		}
 	}
 	wg.Wait()
 }
