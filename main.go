@@ -8,18 +8,18 @@ import (
 )
 
 func main() {
-	localeSlice := [6]string{"hr", "en", "sk", "hr-staging", "en-staging", "sk-staging"}
-	featureSlice := [6]string{"quizzes", "thoughts", "information-block", "saints", "prayers", "user-report"}
+	localeArray := [6]string{"hr", "en", "sk", "hr-staging", "en-staging", "sk-staging"}
+	featureArray := [6]string{"quizzes", "thoughts", "information-block", "saints", "prayers", "user-report"}
 
-	getMiddlewareDataAndStoreToJson(localeSlice, featureSlice)
+	getMiddlewareDataAndStoreToJson(localeArray, featureArray)
 }
 
-func getMiddlewareDataAndStoreToJson(localeSlice [6]string, featureSlice [6]string) {
+func getMiddlewareDataAndStoreToJson(localeArray [6]string, featureArray [6]string) {
 	wg := sync.WaitGroup{}
-	wg.Add(len(localeSlice) * len(featureSlice))
+	wg.Add(len(localeArray) * len(featureArray))
 
-	for _, locale := range localeSlice {
-		for _, feature := range featureSlice {
+	for _, locale := range localeArray {
+		for _, feature := range featureArray {
 			go func(feature string, locale string) {
 				data := service.GetMiddlewareResponseData(feature, locale)
 				storage.WriteJsonArray(fmt.Sprintf("%s-%s", feature, locale), data)
